@@ -54,12 +54,20 @@ namespace twatter_postservice.Controllers
             return "geslaagd";
         }
 
-        [Authorize]
         [HttpGet]
-        [Route("SearchMessage")]
-        public async Task<ActionResult<List<PostDTO>>> FindMessages(SearchDTO searchDTO)
+        [Route("getMessages/{searchterm}")]
+        public async Task<ActionResult<List<PostDTO>>> FindMessages(string searchterm)
         {
-            List<Post> posts = await _context.Posts.Where(b => b.UserName == searchDTO.SearchTerm || b.HashTag == searchDTO.SearchTerm).ToListAsync();
+            List<Post> posts = await _context.Posts.Where(b => b.UserName == searchterm || b.HashTag == searchterm).ToListAsync();
+            List<PostDTO> returnPosts = convertToDTO(posts);
+            return returnPosts;
+        }
+
+        [HttpGet]
+        [Route("getUserMessages/{username}")]
+        public async Task<ActionResult<List<PostDTO>>> FindUserMessages(string username)
+        {
+             List<Post> posts = await _context.Posts.Where(b => b.UserName == searchterm).ToListAsync();
             List<PostDTO> returnPosts = convertToDTO(posts);
             return returnPosts;
         }
