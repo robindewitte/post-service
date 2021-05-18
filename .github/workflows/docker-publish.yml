@@ -13,9 +13,6 @@ jobs:
         with:
           dotnet-version: '5.0.x'
   
-      - uses: microsoft/variable-substitution@v1 
-        with:
-            files: 'twatter-postservice/appsettings.json'
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
