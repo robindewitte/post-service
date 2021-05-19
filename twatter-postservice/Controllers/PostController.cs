@@ -67,7 +67,7 @@ namespace twatter_postservice.Controllers
         [Route("getUserMessages/{username}")]
         public async Task<ActionResult<List<PostDTO>>> FindUserMessages(string username)
         {
-             List<Post> posts = await _context.Posts.Where(b => b.UserName == searchterm).ToListAsync();
+            List<Post> posts = await _context.Posts.Where(b => b.UserName == username).ToListAsync();
             List<PostDTO> returnPosts = convertToDTO(posts);
             return returnPosts;
         }
