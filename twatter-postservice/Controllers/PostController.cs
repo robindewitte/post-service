@@ -60,7 +60,7 @@ namespace twatter_postservice.Controllers
         {
             List<Post> posts = await _context.Posts.Where(b => b.UserName == searchterm || b.HashTag == searchterm).ToListAsync();
             List<PostDTO> returnPosts = convertToDTO(posts);
-            return returnPosts;
+            return Ok(returnPosts);
         }
 
         [HttpGet]
@@ -69,7 +69,7 @@ namespace twatter_postservice.Controllers
         {
             List<Post> posts = await _context.Posts.Where(b => b.UserName == username).ToListAsync();
             List<PostDTO> returnPosts = convertToDTO(posts);
-            return returnPosts;
+            return  Ok(returnPosts);
         }
 
 
@@ -91,7 +91,7 @@ namespace twatter_postservice.Controllers
             return true;
         }
 
-        public static List<PostDTO> convertToDTO(List<Post> posts)
+        public static List<PostDTO> convertToDTO(ICollection<Post> posts)
         {
             List<PostDTO> toReturn = new List<PostDTO>();
             foreach (Post post in posts)
