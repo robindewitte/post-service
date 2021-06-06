@@ -20,6 +20,7 @@ namespace twatter_postservice.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class PostController: Controller
     {
         private readonly PostContext _context;

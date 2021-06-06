@@ -67,9 +67,9 @@ namespace UnitTest
         [Fact]
         public async Task ValidateTokenBlock()
         {
-            var response = await _client.GetAsync("https://localhost:5001/api/post/getUserMessages/robintest");
-            var responseString = response.StatusCode.ToString();
-            Assert.Equal("403", responseString);
+            var response = await _client.GetAsync("https://localhost:5005/api/post/getUserMessages/robintest");
+            var responseString = response.StatusCode;
+            Assert.Equal(System.Net.HttpStatusCode.Unauthorized, responseString);
         }
 
     }
