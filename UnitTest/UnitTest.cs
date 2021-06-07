@@ -70,6 +70,14 @@ namespace UnitTest
             var response = await _client.GetAsync("https://localhost:5005/api/post/getUserMessages/robintest");
             var responseString = response.StatusCode;
             Assert.Equal(System.Net.HttpStatusCode.Unauthorized, responseString);
+
+            string token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyb2JpbnRlc3QiLCJleHAiOjE2MjMwNTc3MjUsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.qf61Bn90DYvIVFNlUlqDfiI7Xw3O_ZdYHG1bjbEyu8U";
+
+            _client.DefaultRequestHeaders.Add("Authorization", token);
+            var responseWithToken = await _client.GetAsync("https://localhost:5005/api/post/getUserMessages/robintest");
+            _client.DefaultRequestHeaders.Clear();
+            responseString = responseWithToken.StatusCode;
+            Assert.Equal(System.Net.HttpStatusCode.OK, responseString);
         }
 
     }
